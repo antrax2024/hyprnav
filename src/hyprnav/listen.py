@@ -1,13 +1,17 @@
 from hyprpy import Hyprland
 from .window import showWorkspaceWindow
+from rich.console import Console
 
+cl = Console()
 instance = Hyprland()
 
 
 def onWorkspaceChanged(sender, **kwargs) -> None:
+    workspace_id = kwargs.get("workspace_id")
     workspace_name = kwargs.get("workspace_name")
-    print(kwargs)
-    print(f"Workspace changed: {workspace_name}")
+    cl.print(
+        f"[bold yellow]Workspace[/bold yellow]:\tid: {workspace_id}\tname: {workspace_name}"
+    )
     showWorkspaceWindow(workspace=workspace_name, delay=500)  # type: ignore
 
 
@@ -18,5 +22,5 @@ def listen() -> None:
         instance.signals.workspacev2.connect(onWorkspaceChanged)
         instance.watch()
     except KeyboardInterrupt:
-        print("Interrupt by user. Exiting...")
+        cl.print("[green]Interrupt by user. Exiting...[/green]")
         return
