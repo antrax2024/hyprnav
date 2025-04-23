@@ -1,10 +1,10 @@
-#MainWindow {
-    background-color: #23272e;
+#centralWidget {
+    background-color: #111111;
 }
 
 #fixedLabel {
     color: #13d81d;
-    font-size: 36px;
+    font-size: 66px;
     font-weight: bold;
 }
 
