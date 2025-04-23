@@ -1,8 +1,18 @@
+# Configuration file for HyprNav
+# This file contains settings for the HyprNav application which helps
+# with navigation in the Hyprland window manager.
+#
+# Sections:
+# - main_window: Controls the dimensions and behavior of the main application window
+# - sound: Settings related to audio feedback during transitions
+
 main_window:
-  width: 450
-  height: 70
+  width: 450 # the width of the main window
+  height: 70 # the height of the main window
+  duration: 400 # the transition timeout in milliseconds
+
 
 sound:
-  enabled: true
-  file: "/home/antrax/Public/transition.wav"
+  enabled: true # whether to play sound on transition?
+  file: "/home/antrax/Public/transition.wav" # the sound file to play on transition
 

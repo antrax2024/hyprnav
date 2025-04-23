@@ -1,6 +1,6 @@
 [project]
 name = "hyprnav"
-version = "0.0.2"
+version = "0.0.3"
 description = "A modern and customizable workspace navigation effect for Hyprland."
 readme = "README.md"
 authors = [{ name = "Antrax", email = "fredcox@gmail.com" }]

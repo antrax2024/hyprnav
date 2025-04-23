@@ -1,15 +1,25 @@
+/**
+ * Main stylesheet for HyprNav application
+ * Contains styling for the main window and labels
+ */
+
+/* Main window and central widget styling - dark transparent background */
 #MainWindow,#centralWidget {
     background-color: rgba(0, 0, 0, 0.849);
     
 }
 
+/* Main fixed label styling - used for application title or primary information */
 #fixedLabel {
-    color: #13d81d;
+    color: #F9A825;
     font-size: 36px;
     font-weight: bold;
+    font-family: "Hack Nerd Font Propo", monospace;
 }
 
+/* Workspace label styling - used for displaying current workspace information */
 #workspaceLabel {
-    color: #8be9fd;
+    color: #FFFF8D;
     font-size: 26px;
+    font-family: "Hack Nerd Font Propo", monospace;
 }

@@ -46,7 +46,7 @@ def onWorkspaceChanged(sender, **kwargs) -> None:
             cl.print(f"[red]{e}[/red]")
             exit(1)
 
-    showWorkspaceWindow(workspace=workspace_name, delay=500)  # type: ignore
+    showWorkspaceWindow(workspace=workspace_name, delay=appConfig.main_window.duration)  # type: ignore
 
 
 def listen() -> None:

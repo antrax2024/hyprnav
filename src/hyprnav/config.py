@@ -1,11 +1,42 @@
 import os
 import shutil
+from typing import Any
 from confz import BaseConfig, FileSource
-from .constants import APP_NAME
+from .constants import APP_NAME, DEFAULT_CONFIG_FILE, DEFAULT_STYLE_FILE
 import importlib.resources
 from rich.console import Console
 
+
 cl = Console()
+
+
+def printMessage(preamble: str, variable: Any) -> None:
+    """
+    Print a message to the console.
+    """
+    cl.print(f"[bold yellow]" + preamble + f"\t[/bold yellow]: {variable}")
+
+
+def cli() -> None:
+    cl = Console()
+    cl.print("[cyan]=[/cyan]" * 80)
+    # Check if the config file exists
+    checkFile(file=DEFAULT_CONFIG_FILE)
+    printMessage(preamble="Config", variable=DEFAULT_CONFIG_FILE)
+    # Check if the style file exists
+    checkFile(file=DEFAULT_STYLE_FILE)
+    printMessage(preamble="Style", variable=DEFAULT_STYLE_FILE)
+    # Check if sound if Enabled
+    appConfig = AppConfig()
+    printMessage(
+        preamble="Sound",
+        variable=(
+            "[green]enabled[/green]"
+            if appConfig.sound.enabled
+            else "[red]disabled[/red]"
+        ),
+    )
+    cl.print("[cyan]=[/cyan]" * 80)
 
 
 def checkFile(file: str) -> None:
@@ -41,6 +72,7 @@ class Sound(BaseConfig):
 class MainWindow(BaseConfig):
     width: int  # Width of the window
     height: int  # Height of the window
+    duration: int  # Duration of the transition in milliseconds
 
 
 # Main configuration class
