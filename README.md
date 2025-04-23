@@ -1,8 +1,6 @@
 # Hyprnav
 
-<p align="center">
-<img src="https://github.com/antrax2024/hyprnav/blob/main/gif/hyprnav-show.gif?raw=true" alt="Hyprnav Logo">
-</p>
+![hyprnav show](gif/hyprnav-show.gif)
 
 <div align="center">
   <span>
@@ -18,12 +16,11 @@ A modern and customizable workspace navigation effect for Hyprland.
 
 ## Description
 
-Hyprnav provides smooth visual transitions when navigating between workspaces in Hyprland. It enhances the user experience by adding polished animations and optional sound effects.
+hyprnav provides smooth visual transitions when navigating between workspaces in Hyprland. It enhances the user experience by adding polished animations and optional sound effects.
 
 ## Features
 
-- Smooth workspace transition animations
-- Customizable visual effects
+- Beautiful and smooth visual transition effect between Hyprland workspaces
 - Optional sound effects for workspace transitions
 - Easy configuration through YAML files
 
@@ -58,12 +55,46 @@ Using paru:
 paru -S hyprnav
 ```
 
+## Usage
+
+```bash
+hyprnav         # Start with default settings
+```
+
 ## Configuration
 
 Hyprnav automatically creates configuration files in `~/.config/hyprnav` when first run. These files include:
 
 - `config.yaml`: Main configuration file
-- `themes/`: Directory containing theme configurations
+- `style.css`: Customizable stylesheet for the application appearance
+
+### Configuration Parameters
+
+The `config.yaml` file contains the following configurable parameters:
+
+#### Main Window
+
+```yaml
+main_window:
+  width: 450 # Width of the transition window in pixels
+  height: 70 # Height of the transition window in pixels
+  duration: 400 # Duration of transition animation in milliseconds
+```
+
+- `width`: Controls the horizontal size of the animation window (default: 450px)
+- `height`: Controls the vertical size of the animation window (default: 70px)
+- `duration`: Sets how long the transition animation plays (default: 400ms)
+
+#### Sound Settings
+
+```yaml
+sound:
+  enabled: false # Set to true to enable sound effects
+  file: "/path/to/your/sound/file.wav" # Path to the sound file
+```
+
+- `enabled`: Toggle sound effects on/off (default: false)
+- `file`: Absolute path to the sound file that will play during transitions (WAV format recommended)
 
 ### Enabling Sound Effects
 
@@ -71,16 +102,49 @@ To enable sound effects for workspace transitions, edit your `~/.config/hyprnav/
 
 ```yaml
 sound:
-  enabled: true
-  volume: 0.5 # Range from 0.0 to 1.0
+  enabled: true # Change from false to true
+  file: "/path/to/your/sound/file.wav" # Specify the path to your sound file
 ```
 
-## Usage
+The default configuration has sounds disabled. You'll need to provide a valid audio file path (WAV format recommended) for the transition sound to work.
 
-```bash
-hyprnav --help  # Show all available options
-hyprnav         # Start with default settings
+### Customizing Appearance
+
+You can customize the appearance of Hyprnav by editing the `~/.config/hyprnav/style.css` file. This file allows you to change colors, fonts, sizes, and other visual aspects of the application.
+
+#### Default Stylesheet Elements
+
+```css
+/* Main window styling - controls the background */
+#MainWindow,
+#centralWidget {
+  background-color: rgba(0, 0, 0, 0.849); /* Dark transparent background */
+}
+
+/* Fixed label styling - used for application title */
+#fixedLabel {
+  color: #00ffd0; /* Teal/cyan color */
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Hack Nerd Font Propo", monospace;
+}
+
+/* Workspace label styling - displays workspace information */
+#workspaceLabel {
+  color: #00ffd0; /* Teal/cyan color */
+  font-size: 26px;
+  font-family: "Hack Nerd Font Propo", monospace;
+}
 ```
+
+You can customize these elements to match your desktop theme:
+
+- Change the background transparency by adjusting the alpha value in `rgba(0, 0, 0, 0.849)`
+- Modify text colors by changing the color values (e.g., `#00ffd0`)
+- Adjust font sizes and families to your preference
+- Add additional CSS rules to further customize the appearance
+
+After making changes to the stylesheet, restart Hyprnav for the changes to take effect.
 
 ## License
 
