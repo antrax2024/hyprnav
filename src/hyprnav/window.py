@@ -28,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fixedLabel.setObjectName("fixedLabel")
         self.verticalLayout.addWidget(self.fixedLabel)
         # set up workspaceLabel
-        self.workspaceLabel = QtWidgets.QLabel(workspace)
+        self.workspaceLabel = QtWidgets.QLabel(f"{workspace}")
         self.workspaceLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.workspaceLabel.setObjectName("workspaceLabel")
         self.verticalLayout.addWidget(self.workspaceLabel)
@@ -52,7 +52,6 @@ class MainWindow(QtWidgets.QMainWindow):
         from .click import styleFile
 
         cssPath = styleFile
-        print(f"Using style from\t: {cssPath}")
 
         try:
             # Read CSS file content
