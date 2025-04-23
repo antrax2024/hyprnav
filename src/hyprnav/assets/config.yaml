@@ -13,6 +13,6 @@ main_window:
 
 
 sound:
-  enabled: true # whether to play sound on transition?
-  file: "/home/antrax/Public/transition.wav" # the sound file to play on transition
+  enabled: false # whether to play sound on transition?
+  file: "/home/user/Public/transition.wav" # the sound file to play on transition
 

@@ -20,19 +20,20 @@ def initializeSound() -> None:
 
     if appConfig.sound.enabled:
         # Expand the path in case it contains ~ to ensure proper file access
-        wavFile = appConfig.sound.file
+        wavFile = os.path.expanduser(appConfig.sound.file)
+
         # Start pygame mixer
         try:
             pygame.mixer.init()
             # Load the sound file
             global transitionSound
             transitionSound = pygame.mixer.Sound(wavFile)
-        except pygame.error as e:
+        except (pygame.error, FileNotFoundError) as e:
             cl.print(
-                f"[red]Error loading sound file: {wavFile}. Make sure the file exists and is a valid sound file.[/red]"
+                f"[red]Warning: Sound file not found at '{wavFile}'. Application will continue without sound effects.[/red]"
             )
-            cl.print(f"[red]{e}[/red]")
-            exit(1)
+            # Set transitionSound to None to indicate sound is not available
+            transitionSound = None
 
 
 def onWorkspaceChanged(sender, **kwargs) -> None:
@@ -47,12 +48,9 @@ def onWorkspaceChanged(sender, **kwargs) -> None:
         try:
             pygame.mixer.stop()
             transitionSound.play()
-        except pygame.error as e:
-            cl.print(
-                f"[red]Error playing sound. Make sure the sound system is properly configured.[/red]"
-            )
+        except Exception as e:
+            cl.print(f"[red]Error. Sound file not found!.[/red]")
             cl.print(f"[red]{e}[/red]")
-            exit(1)
 
     showWorkspaceWindow(workspace=workspace_name, delay=appConfig.main_window.duration)  # type: ignore
 
