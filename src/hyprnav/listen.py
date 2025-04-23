@@ -4,17 +4,17 @@ from hyprpy import Hyprland
 from .window import showWorkspaceWindow
 from rich.console import Console
 from .config import AppConfig
-from .constants import SOUND_PATH
 
 
-cl = Console()
+# initialize console with custom log‐time format
+cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
 instance = Hyprland()
 # Inicializar o mixer do pygame
 appConfig = AppConfig()
 # --- sound setup ---
 if appConfig.sound.enabled:
     # Expand the path in case it contains ~ to ensure proper file access
-    wavFile = os.path.expanduser(appConfig.sound.file)
+    wavFile = appConfig.sound.file
     # Start pygame mixer
     try:
         pygame.mixer.init()
@@ -31,7 +31,7 @@ if appConfig.sound.enabled:
 def onWorkspaceChanged(sender, **kwargs) -> None:
     workspace_id = kwargs.get("workspace_id")
     workspace_name = kwargs.get("workspace_name")
-    cl.print(
+    cl.log(
         f"[bold yellow]Workspace[/bold yellow]: id: {workspace_id} name: {workspace_name}"
     )
     # Parar qualquer som em reprodução e iniciar novo
