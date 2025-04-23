@@ -3,6 +3,7 @@ from PyQt6 import QtWidgets, QtCore
 from PyQt6.QtGui import QGuiApplication
 from .config import AppConfig
 
+
 app = None  # Global QApplication instance
 
 
@@ -48,9 +49,10 @@ class MainWindow(QtWidgets.QMainWindow):
         Dynamically replaces variables with configuration values.
         """
         # Path to CSS file (relative to the module)
-        from .click import CSS_FILE
+        from .click import styleFile
 
-        cssPath = CSS_FILE
+        cssPath = styleFile
+        print(f"Using style from\t: {cssPath}")
 
         try:
             # Read CSS file content

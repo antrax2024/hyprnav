@@ -1,13 +1,15 @@
 import os
 import sys
 import click
+from rich import style
 from .config import AppConfig, FileSource, createConfigFile
 from .constants import APP_NAME, APP_VERSION, DEFAULT_CONFIG_FILE, DEFAULT_STYLE_FILE
 from .listen import listen
 
-
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
-CSS_FILE = DEFAULT_STYLE_FILE
+
+# Variável global para armazenar opções
+styleFile: str = ""
 
 
 class CustomHelpCommand(click.Command):
@@ -35,30 +37,28 @@ class CustomHelpCommand(click.Command):
     help=f"Specifies the style css file style.cs file (default: {DEFAULT_STYLE_FILE})",
 )
 def cli(config_file, style_file) -> None:
-    """A modern powermenu for Hyprland."""
+    """A modern and customizable workspace navigation effect for Hyprland."""
+    global styleFile
     click.echo(message=f"{APP_NAME} v{APP_VERSION}\n")
+    styleFile = style_file
+    if not os.path.exists(path=style_file):
+        click.echo(
+            message=f"Style file does not exist: {style_file}.\nCreating a new..."
+        )
+        # create the file if not exists
+        createConfigFile(configFile=style_file, type="style")
+    else:
+        click.echo(message=f"Using style from\t: {style_file}")
 
-    if style_file:
-        if not os.path.exists(path=style_file):
-            click.echo(
-                message=f"Style file does not exist: {style_file}.\nCreating a new..."
-            )
-            # create the directory if it does not exist
-            createConfigFile(configFile=style_file, type="style")
-        else:
-            click.echo(message=f"Using style from\t: {style_file}")
-            CSS_FILE = style_file
-
-    if config_file:
-        # determine if file exists
-        if not os.path.exists(path=config_file):
-            click.echo(
-                message=f"Configuration file does not exist: {config_file}.\nCreating a new..."
-            )
-            # create the directory if it does not exist
-            createConfigFile(configFile=config_file, type="config")
-        else:
-            click.echo(message=f"Using config from\t: {config_file}")
+    # determine if file exists
+    if not os.path.exists(path=config_file):
+        click.echo(
+            message=f"Configuration file does not exist: {config_file}.\nCreating a new..."
+        )
+        # create the directory if it does not exist
+        createConfigFile(configFile=config_file, type="config")
+    else:
+        click.echo(message=f"Using config from\t: {config_file}")
 
     AppConfig.CONFIG_SOURCES = FileSource(file=config_file)
     try:
