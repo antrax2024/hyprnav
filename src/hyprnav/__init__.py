@@ -1,2 +1,11 @@
+import os
+
+
 def main() -> None:
-    print("Hello from hyprnav!")
+    try:
+        del os.environ["QT_STYLE_OVERRIDE"]
+    except KeyError as e:
+        print(f"KeyError: {e}")
+    from .listen import listen
+
+    listen()
