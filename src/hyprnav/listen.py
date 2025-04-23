@@ -6,7 +6,7 @@ import importlib.resources
 
 cl = Console()
 instance = Hyprland()
-mp3File = importlib.resources.files("hyprnav").joinpath("assets/transition.mp3")
+mp3File = importlib.resources.files("hyprnav").joinpath("assets/transition.wav")
 
 
 def onWorkspaceChanged(sender, **kwargs) -> None:
