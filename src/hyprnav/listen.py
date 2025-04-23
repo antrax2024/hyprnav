@@ -1,17 +1,21 @@
 from hyprpy import Hyprland
 from .window import showWorkspaceWindow
 from rich.console import Console
+from playsound3 import playsound
+import importlib.resources
 
 cl = Console()
 instance = Hyprland()
+mp3File = importlib.resources.files("hyprnav").joinpath("assets/transition.mp3")
 
 
 def onWorkspaceChanged(sender, **kwargs) -> None:
     workspace_id = kwargs.get("workspace_id")
     workspace_name = kwargs.get("workspace_name")
     cl.print(
-        f"[bold yellow]Workspace[/bold yellow]:\tid: {workspace_id}\tname: {workspace_name}"
+        f"[bold yellow]Workspace[/bold yellow]: id: {workspace_id} name: {workspace_name}"
     )
+    playsound(sound=str(mp3File), block=False)
     showWorkspaceWindow(workspace=workspace_name, delay=500)  # type: ignore
 
 
