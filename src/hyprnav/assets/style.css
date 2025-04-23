@@ -1,10 +1,11 @@
-#centralWidget {
-    background-color: #111111;
+#MainWindow,#centralWidget {
+    background-color: rgba(0, 0, 0, 0.849);
+    
 }
 
 #fixedLabel {
     color: #13d81d;
-    font-size: 66px;
+    font-size: 36px;
     font-weight: bold;
 }
 

@@ -1,4 +1,3 @@
 main_window:
   width: 450
-  height: 120
-  background_color: "#111111"
+  height: 70

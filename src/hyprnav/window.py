@@ -33,8 +33,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fixedLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.fixedLabel.setObjectName("fixedLabel")
         self.verticalLayout.addWidget(self.fixedLabel)
+
         # set up workspaceLabel
-        self.workspaceLabel = QtWidgets.QLabel(f"{workspace}")
+        self.workspaceLabel = QtWidgets.QLabel(f":: {workspace} ::")
+
         self.workspaceLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.workspaceLabel.setObjectName("workspaceLabel")
         self.verticalLayout.addWidget(self.workspaceLabel)
@@ -66,7 +68,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Apply the stylesheet
             self.setStyleSheet(cssContent)
-            print(f"Stylesheet loaded from {cssPath}")
         except Exception as e:
             print(f"Error loading CSS file: {e}")
             # Fallback to inline styles
