@@ -1,21 +1,10 @@
-/*
- * style.css - Main stylesheet for HyprNav application
- *
- * This file defines the visual appearance of the main window and its labels.
- *
- * Selectors:
- *   #MainWindow      - Sets the background color for the main application window.
- *   #fixedLabel      - Styles the fixed label with a specific color, font size, and bold weight.
- *   #workspaceLabel  - Styles the workspace label with a different color, font size, and italic style.
- */
-
 #MainWindow {
     background-color: #23272e;
 }
 
 #fixedLabel {
-    color: #ffb86c;
-    font-size: 18px;
+    color: #13d81d;
+    font-size: 36px;
     font-weight: bold;
 }
 

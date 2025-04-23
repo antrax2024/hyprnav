@@ -22,7 +22,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.verticalLayout = QtWidgets.QVBoxLayout(centralWidget)
 
         # set up fixedLabel
-        self.fixedLabel = QtWidgets.QLabel("Worspace")
+        self.fixedLabel = QtWidgets.QLabel("Workspace")
         self.fixedLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.fixedLabel.setObjectName("fixedLabel")
         self.verticalLayout.addWidget(self.fixedLabel)
