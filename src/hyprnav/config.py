@@ -17,14 +17,22 @@ def printMessage(preamble: str, variable: Any) -> None:
     cl.print(f"[bold yellow]" + preamble + f"\t[/bold yellow]: {variable}")
 
 
+def ensureConfigFiles() -> None:
+    """
+    Ensure that all required configuration files exist.
+    This function must be called before any AppConfig instances are created.
+    """
+    # Check if the config file exists
+    checkFile(file=DEFAULT_CONFIG_FILE)
+    # Check if the style file exists
+    checkFile(file=DEFAULT_STYLE_FILE)
+
+
 def cli() -> None:
     cl = Console()
     cl.print("[cyan]=[/cyan]" * 80)
-    # Check if the config file exists
-    checkFile(file=DEFAULT_CONFIG_FILE)
+    # Display configuration information
     printMessage(preamble="Config", variable=DEFAULT_CONFIG_FILE)
-    # Check if the style file exists
-    checkFile(file=DEFAULT_STYLE_FILE)
     printMessage(preamble="Style", variable=DEFAULT_STYLE_FILE)
     # Check if sound if Enabled
     appConfig = AppConfig()
