@@ -1,12 +1,22 @@
 from hyprpy import Hyprland
 from .window import showWorkspaceWindow
 from rich.console import Console
-from playsound3 import playsound
+import pygame
+from .config import AppConfig
 import importlib.resources
+
 
 cl = Console()
 instance = Hyprland()
-mp3File = importlib.resources.files("hyprnav").joinpath("assets/transition.wav")
+# Inicializar o mixer do pygame
+appConfig = AppConfig()
+# --- sound setup ---
+if appConfig.sound.enabled:
+    wavFile = importlib.resources.files().joinpath(appConfig.sound.sound_file)
+    # Inicializar o mixer do pygame
+    pygame.mixer.init()
+    # Carregar o som antecipadamente
+    transition_sound = pygame.mixer.Sound(str(wavFile))
 
 
 def onWorkspaceChanged(sender, **kwargs) -> None:
@@ -15,7 +25,11 @@ def onWorkspaceChanged(sender, **kwargs) -> None:
     cl.print(
         f"[bold yellow]Workspace[/bold yellow]: id: {workspace_id} name: {workspace_name}"
     )
-    playsound(sound=str(mp3File), block=False)
+    # Parar qualquer som em reprodução e iniciar novo
+    if appConfig.sound.enabled:
+        pygame.mixer.stop()
+        transitionSound.play()  # type: ignore
+
     showWorkspaceWindow(workspace=workspace_name, delay=500)  # type: ignore
 
 
@@ -28,3 +42,5 @@ def listen() -> None:
     except KeyboardInterrupt:
         cl.print("[green]Interrupt by user. Exiting...[/green]")
         return
+    finally:
+        pygame.mixer.quit()

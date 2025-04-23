@@ -36,6 +36,15 @@ def createConfigFile(configFile: str, type: str = "config") -> None:
         sys.exit(1)
 
 
+class Sound(BaseConfig):
+    """
+    Sound configuration class.
+    """
+
+    enabled: bool  # Whether sound is enabled
+    sound_file: str  # Path to the sound file
+
+
 # Main Window
 class MainWindow(BaseConfig):
     width: int  # Width of the window
@@ -44,11 +53,10 @@ class MainWindow(BaseConfig):
 
 # Main configuration class
 class AppConfig(BaseConfig):
-
     CONFIG_SOURCES = FileSource(
         file=os.path.join(
             os.path.expanduser(path="~"), ".config", f"{APP_NAME}", "config.yaml"
         )
     )
-
     main_window: MainWindow  # Main Window
+    sound: Sound  # Sound configuration

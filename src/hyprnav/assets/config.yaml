@@ -1,3 +1,8 @@
 main_window:
   width: 450
   height: 70
+
+sound:
+  enabled: true
+  sound_file: "/home/antrax/.config/hyprnav/transition.wav"
+
