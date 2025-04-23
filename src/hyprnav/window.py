@@ -35,7 +35,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.verticalLayout.addWidget(self.fixedLabel)
 
         # set up workspaceLabel
-        self.workspaceLabel = QtWidgets.QLabel(f":: {workspace} ::")
+        self.workspaceLabel = QtWidgets.QLabel(f"{workspace} ::")
 
         self.workspaceLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.workspaceLabel.setObjectName("workspaceLabel")
