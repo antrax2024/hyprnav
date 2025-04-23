@@ -6,6 +6,8 @@ def main() -> None:
         del os.environ["QT_STYLE_OVERRIDE"]
     except KeyError as e:
         print(f"KeyError: {e}")
-    from .listen import listen
+    # from .listen import listen
+    # listen()
+    from .click import cli
 
-    listen()
+    cli()

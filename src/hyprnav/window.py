@@ -2,6 +2,7 @@ import sys
 from PyQt6 import QtWidgets, uic, QtCore
 import importlib.resources
 from PyQt6.QtGui import QGuiApplication
+from .config import AppConfig
 
 app = None  # Global QApplication instance
 
@@ -16,6 +17,13 @@ class MainWindow(QtWidgets.QMainWindow):
         QGuiApplication.setApplicationName("hyprnav")
         QGuiApplication.setDesktopFileName("hyprnav")
         QGuiApplication.setApplicationDisplayName("hyprnav")
+        # appConfig
+        self.appConfig = AppConfig()
+        # Adjust window size
+        self.setMinimumSize(
+            self.appConfig.main_window.width, self.appConfig.main_window.height
+        )
+
         # widget access
         self.workspaceLabel.setText(f":: {workspace} ::")  # type: ignore
         self.show()

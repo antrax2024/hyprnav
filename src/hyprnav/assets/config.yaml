@@ -1,0 +1,4 @@
+main_window:
+  width: 350
+  height: 60
+  background_color: "#111111"
