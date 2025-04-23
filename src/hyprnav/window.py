@@ -17,7 +17,7 @@ class MainWindow(QtWidgets.QMainWindow):
         QGuiApplication.setApplicationDisplayName("hyprnav")
 
         # widget access
-        self.workspaceLabel.setText(":: Gonha ::")  # type: ignore
+        # self.workspaceLabel.setText(":: Gonha ::")  # type: ignore
 
         self.show()
 
