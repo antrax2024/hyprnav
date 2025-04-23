@@ -1,39 +1,31 @@
 import os
-import sys
+import shutil
 from confz import BaseConfig, FileSource
 from .constants import APP_NAME
 import importlib.resources
+from rich.console import Console
+
+cl = Console()
 
 
-def createConfigFile(configFile: str, type: str = "config") -> None:
-    """
-    Create the config file if it doesn't exist.
-    """
-    try:
-        if not os.path.exists(path=configFile):
-            dir_name: str = os.path.dirname(configFile)
-            if dir_name:
-                os.makedirs(
-                    name=dir_name,
-                    exist_ok=True,
-                )
+def checkFile(file: str) -> None:
+    if not os.path.exists(path=file):
+        os.makedirs(name=os.path.dirname(p=file), exist_ok=True)
+        copyFile(destination=file)
 
-            # copy the file assets/config.yaml to dir_name
-            # Get the file content from package resources
-            target_filename = os.path.basename(configFile)
-            source_file = "config.yaml" if type == "config" else "style.css"
-            # Use importlib.resources to get asset path
-            with (
-                importlib.resources.files("hyprnav")
-                .joinpath(f"assets/{source_file}")
-                .open("rb") as src_file
-            ):
-                with open(configFile, "wb") as dst_file:
-                    dst_file.write(src_file.read())
 
-    except Exception as e:
-        print(f"Error creating config file: {e}")
-        sys.exit(1)
+def copyFile(destination) -> None:
+    destinationDir = os.path.dirname(destination)
+
+    # Extract only the filename from destination variable
+    filename = os.path.basename(destination)
+
+    source = importlib.resources.files(anchor="hyprnav").joinpath(f"assets/{filename}")
+    # Convert Traversable to string path and copy the file
+    shutil.copy2(
+        src=str(object=source),
+        dst=destination,
+    )
 
 
 class Sound(BaseConfig):
@@ -42,7 +34,7 @@ class Sound(BaseConfig):
     """
 
     enabled: bool  # Whether sound is enabled
-    sound_file: str  # Path to the sound file
+    file: str  # Path to the sound file
 
 
 # Main Window

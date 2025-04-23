@@ -4,5 +4,5 @@ main_window:
 
 sound:
   enabled: true
-  sound_file: "/home/antrax/.config/hyprnav/transition.wav"
+  file: "/home/antrax/Public/transition.wav"
 
