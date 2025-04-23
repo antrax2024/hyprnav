@@ -6,9 +6,9 @@
   <span>
     <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/dockmate">
     <img alt="AUR Version" src="https://img.shields.io/aur/version/dockmate">
-    <img src="https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fantrax2024%2Fdockmate%2Frefs%2Fheads%2Fmain%2Fpyproject.toml" alt="Python Version" />
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/antrax2024/dockmate">
-    <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dockmate">
+    <img alt="Python Version from PEP 621 TOML" src="https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fantrax2024%2Fhyprnav%2Frefs%2Fheads%2Fmain%2Fpyproject.toml">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/antrax2024/hyprnav">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/antrax2024/hyprnav">
   </span>
 </div>
 
