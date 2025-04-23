@@ -1,6 +1,5 @@
 import sys
-from PyQt6 import QtWidgets, uic, QtCore
-import importlib.resources
+from PyQt6 import QtWidgets, QtCore
 from PyQt6.QtGui import QGuiApplication
 from .config import AppConfig
 
@@ -10,30 +9,37 @@ app = None  # Global QApplication instance
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, workspace: str) -> None:
         super().__init__()
-        # Load ui
-        uiFile = importlib.resources.files("hyprnav").joinpath("assets/window.ui")
-        uic.loadUi(uiFile, self)  # type: ignore
         # Set application name and class before creating QWidget
         QGuiApplication.setApplicationName("hyprnav")
         QGuiApplication.setDesktopFileName("hyprnav")
         QGuiApplication.setApplicationDisplayName("hyprnav")
+
+        # setup main window
+        self.setObjectName("MainWindow")
+
+        # Create a central widget and set layout
+        centralWidget = QtWidgets.QWidget(self)
+        self.verticalLayout = QtWidgets.QVBoxLayout(centralWidget)
+
+        # set up fixedLabel
+        self.fixedLabel = QtWidgets.QLabel("Worspace")
+        self.fixedLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.fixedLabel.setObjectName("fixedLabel")
+        self.verticalLayout.addWidget(self.fixedLabel)
+        # set up workspaceLabel
+        self.workspaceLabel = QtWidgets.QLabel(workspace)
+        self.workspaceLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.workspaceLabel.setObjectName("workspaceLabel")
+        self.verticalLayout.addWidget(self.workspaceLabel)
+
         # appConfig
         self.appConfig = AppConfig()
         # set window object name for css styling
         self.setObjectName("MainWindow")
-        # Adjust window size
-        self.setMinimumSize(
-            self.appConfig.main_window.width, self.appConfig.main_window.height
-        )
+        # apply styles
+        self.applyStyles()
 
-        # set fixedLabel object name for css styling
-        self.fixedLabel.setObjectName("fixedLabel")  # type: ignore
-
-        # widget access
-        self.workspaceLabel.setText(f":: {workspace} ::")  # type: ignore
-        # set workspaceLabel object name for css styling
-        self.workspaceLabel.setObjectName("workspaceLabel")  # type: ignore
-
+        self.setCentralWidget(centralWidget)
         self.show()
 
     def applyStyles(self) -> None:
@@ -42,7 +48,9 @@ class MainWindow(QtWidgets.QMainWindow):
         Dynamically replaces variables with configuration values.
         """
         # Path to CSS file (relative to the module)
-        cssPath = self.style_file
+        from .click import CSS_FILE
+
+        cssPath = CSS_FILE
 
         try:
             # Read CSS file content

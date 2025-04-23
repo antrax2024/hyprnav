@@ -7,6 +7,7 @@ from .listen import listen
 
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
+CSS_FILE = DEFAULT_STYLE_FILE
 
 
 class CustomHelpCommand(click.Command):
@@ -46,10 +47,10 @@ def cli(config_file, style_file) -> None:
             createConfigFile(configFile=style_file, type="style")
         else:
             click.echo(message=f"Using style from\t: {style_file}")
+            CSS_FILE = style_file
 
     if config_file:
         # determine if file exists
-
         if not os.path.exists(path=config_file):
             click.echo(
                 message=f"Configuration file does not exist: {config_file}.\nCreating a new..."
@@ -61,8 +62,6 @@ def cli(config_file, style_file) -> None:
 
     AppConfig.CONFIG_SOURCES = FileSource(file=config_file)
     try:
-        appConfig = AppConfig()
-        # click.echo(appConfig)
         listen()
     except Exception as e:
         click.echo(message=f"Error loading config: {e}")
