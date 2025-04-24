@@ -6,7 +6,6 @@ from .constants import APP_NAME, APP_VERSION, DEFAULT_CONFIG_FILE, DEFAULT_STYLE
 import importlib.resources
 from rich.console import Console
 
-
 cl = Console()
 
 

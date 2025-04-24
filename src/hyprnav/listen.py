@@ -18,6 +18,7 @@ except Exception as e:
 appConfig = AppConfig()
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
+currentSound = None  # current sound to be played
 
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
@@ -30,8 +31,12 @@ if appConfig.sound.enabled:
 
 
 def playSound() -> None:
+    global currentSound
     if audioFileOK:
-        playsound(sound=f"{appConfig.sound.file}", block=False)
+        if currentSound and currentSound.is_alive():
+            currentSound.stop()
+
+        currentSound = playsound(sound=f"{appConfig.sound.file}", block=False)
 
 
 def onWorkspaceChanged(sender: Any, **kwargs) -> None:
