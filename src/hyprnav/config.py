@@ -12,9 +12,9 @@ cl = Console()
 
 def printMessage(preamble: str, variable: Any) -> None:
     """
-    Print a message to the console.
+    Print a message to the console with fixed width preamble.
     """
-    cl.print(f"[bold yellow]" + preamble + f"\t[/bold yellow]: {variable}")
+    cl.print(f"[bold yellow]{preamble:<15}[/bold yellow]: {variable}")
 
 
 def ensureConfigFiles() -> None:
@@ -37,17 +37,14 @@ def cli() -> None:
     # Check if sound if Enabled
     appConfig = AppConfig()
     printMessage(
-        preamble="Sound",
-        variable=(
-            "[green]enabled[/green]"
-            if appConfig.sound.enabled
-            else "[red]disabled[/red]"
-        ),
-    )
-    printMessage(
-        preamble="File",
+        preamble="Audio File",
         variable=(f"{appConfig.sound.file}"),
     )
+    printMessage(
+        preamble="Enabled",
+        variable=("[green]Yes[/green]" if appConfig.sound.enabled else "[red]No[/red]"),
+    )
+
     cl.print("[cyan]=[/cyan]" * 80)
 
 

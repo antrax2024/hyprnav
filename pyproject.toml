@@ -1,6 +1,6 @@
 [project]
 name = "hyprnav"
-version = "0.0.8"
+version = "0.0.12"
 description = "A modern and customizable workspace navigation effect for Hyprland."
 readme = "README.md"
 license = { text = "MIT" }
@@ -10,7 +10,7 @@ dependencies = [
     "click>=8.1.8",
     "confz>=2.1.0",
     "hyprpy>=0.2.0",
-    "pygame>=2.6.1",
+    "playsound3>=3.2.3",
     "pyqt6>=6.9.0",
     "rich>=14.0.0",
 ]

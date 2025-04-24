@@ -1,65 +1,48 @@
 import os
-import pygame
+import sys
 from hyprpy import Hyprland
 from .window import showWorkspaceWindow
+from playsound3 import playsound
 from rich.console import Console
 from .config import AppConfig
-
+from typing import Any
 
 # initialize console with custom log‐time format
 cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
 instance = Hyprland()
+appConfig = AppConfig()
+audioFileOK = False
 
-# Initialize sound variables
-transitionSound = None
+if appConfig.sound.enabled:
+    # check if appConfig.sound.file exists
+    if not os.path.exists(appConfig.sound.file):
+        cl.print(f"[red]Audio file not found: {appConfig.sound.file}[/red]")
+        sys.exit(1)
 
-
-def initializeSound() -> None:
-    """Initialize pygame mixer and load sound if enabled in config."""
-    appConfig = AppConfig()
-
-    if appConfig.sound.enabled:
-        # Expand the path in case it contains ~ to ensure proper file access
-        wavFile = os.path.expanduser(appConfig.sound.file)
-
-        # Start pygame mixer
-        try:
-            pygame.mixer.init()
-            # Load the sound file
-            global transitionSound
-            transitionSound = pygame.mixer.Sound(wavFile)
-        except (pygame.error, FileNotFoundError) as e:
-            cl.print(
-                f"[red]Warning: Sound file not found at '{wavFile}'. Application will continue without sound effects.[/red]"
-            )
-            # Set transitionSound to None to indicate sound is not available
-            transitionSound = None
+    audioFileOK = True
 
 
-def onWorkspaceChanged(sender, **kwargs) -> None:
-    appConfig = AppConfig()
-    workspace_id = kwargs.get("workspace_id")
-    workspace_name = kwargs.get("workspace_name")
-    cl.log(
-        f"[bold yellow]Workspace[/bold yellow]: id: {workspace_id} name: {workspace_name}"
+def playSound() -> None:
+    if audioFileOK:
+        playsound(sound=f"{appConfig.sound.file}", block=False)
+
+
+def onWorkspaceChanged(sender: Any, **kwargs) -> None:
+    """Handle workspace change events"""
+    workspaceId = kwargs.get("workspace_id")
+    workspaceName = kwargs.get("workspace_name")
+    cl.print(
+        f"[bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
     )
-    # Parar qualquer som em reprodução e iniciar novo
-    if appConfig.sound.enabled and transitionSound:
-        try:
-            pygame.mixer.stop()
-            transitionSound.play()
-        except Exception as e:
-            cl.print(f"[red]Error. Sound file not found!.[/red]")
-            cl.print(f"[red]{e}[/red]")
 
-    showWorkspaceWindow(workspace=workspace_name, delay=appConfig.main_window.duration)  # type: ignore
+    if audioFileOK:
+        playSound()
+
+    showWorkspaceWindow(workspace=workspaceName, delay=appConfig.main_window.duration)  # type: ignore
 
 
 def listen() -> None:
     """Listen for workspace changes and show a window."""
-    # Initialize sound system
-    initializeSound()
-
     try:
         # Connect to the Hyprland signals
         instance.signals.workspacev2.connect(onWorkspaceChanged)
@@ -67,6 +50,3 @@ def listen() -> None:
     except KeyboardInterrupt:
         cl.print("[green]Interrupt by user. Exiting...[/green]")
         return
-    finally:
-        if pygame.mixer.get_init():
-            pygame.mixer.quit()
