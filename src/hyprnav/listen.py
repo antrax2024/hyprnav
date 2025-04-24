@@ -9,7 +9,12 @@ from typing import Any
 
 # initialize console with custom log‐time format
 cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
-instance = Hyprland()
+try:
+    instance = Hyprland()
+except Exception as e:
+    cl.print(f"[red]Error connecting to Hyprland: {e}[/red]")
+    sys.exit(1)
+
 appConfig = AppConfig()
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
