@@ -39,7 +39,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     iterations += 1
 
     cl.print(
-        f"{iterations}: [bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
+        f"{iterations}\t: [bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
     )
 
     if audioFileOK:
