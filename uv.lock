@@ -49,7 +49,7 @@ wheels = [
 
 [[package]]
 name = "hyprnav"
-version = "0.0.12"
+version = "0.0.9"
 source = { editable = "." }
 dependencies = [
     { name = "click" },

@@ -11,7 +11,8 @@ from typing import Any
 cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
 instance = Hyprland()
 appConfig = AppConfig()
-audioFileOK = False
+audioFileOK = False  # by default we assume the audio file is not ok
+iterations: int = 0  # number of iterations to wait for the workspace to be ready
 
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
@@ -19,6 +20,7 @@ if appConfig.sound.enabled:
         cl.print(f"[red]Audio file not found: {appConfig.sound.file}[/red]")
         sys.exit(1)
 
+    # now the audio is ok
     audioFileOK = True
 
 
@@ -31,8 +33,13 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     """Handle workspace change events"""
     workspaceId = kwargs.get("workspace_id")
     workspaceName = kwargs.get("workspace_name")
+
+    # Increment iterations counter before printing
+    global iterations
+    iterations += 1
+
     cl.print(
-        f"[bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
+        f"{iterations}: [bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
     )
 
     if audioFileOK:
