@@ -2,7 +2,7 @@ import os
 import shutil
 from typing import Any
 from confz import BaseConfig, FileSource
-from .constants import APP_NAME, DEFAULT_CONFIG_FILE, DEFAULT_STYLE_FILE
+from .constants import APP_NAME, APP_VERSION, DEFAULT_CONFIG_FILE, DEFAULT_STYLE_FILE
 import importlib.resources
 from rich.console import Console
 
@@ -29,7 +29,7 @@ def ensureConfigFiles() -> None:
 
 
 def cli() -> None:
-    cl = Console()
+    cl.print(f"[bold yellow]{APP_NAME} v{APP_VERSION}[/bold yellow]\n")
     cl.print("[cyan]=[/cyan]" * 80)
     # Display configuration information
     printMessage(preamble="Config", variable=DEFAULT_CONFIG_FILE)
@@ -43,6 +43,10 @@ def cli() -> None:
             if appConfig.sound.enabled
             else "[red]disabled[/red]"
         ),
+    )
+    printMessage(
+        preamble="File",
+        variable=(f"{appConfig.sound.file}"),
     )
     cl.print("[cyan]=[/cyan]" * 80)
 
