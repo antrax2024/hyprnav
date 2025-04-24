@@ -12,11 +12,11 @@
   </span>
 </div>
 
-A modern and customizable workspace navigation effect for Hyprland.
+A modern and customizable workspace navigation effect for [Hyprland](https://hyprland.org/).
 
 ## Description
 
-hyprnav provides smooth visual transitions when navigating between workspaces in Hyprland. It enhances the user experience by adding polished animations and optional sound effects.
+**hyprnav** provides smooth visual transitions when navigating between workspaces in [Hyprland](https://hyprland.org/). It enhances the user experience by adding polished animations and optional sound effects.
 
 ## Features
 
@@ -26,14 +26,25 @@ hyprnav provides smooth visual transitions when navigating between workspaces in
 
 ## Installation
 
-### From PyPI
+### 1. Hyprland Configuration (Important)
+
+Edit your _hyprland.conf_ and add the following line:
+
+```ini
+# Rule for hyprnav
+windowrulev2 = float,class:hyprnav
+```
+
+### 2. Install
+
+#### From PyPI
 
 ```bash
 pip install hyprnav # if you use pip
 uv pip install hyprnav # or with uv
 ```
 
-### Arch Linux (AUR)
+#### Arch Linux (AUR)
 
 ```bash
 yay -S hyprnav # with yay
@@ -50,7 +61,7 @@ hyprnav
 
 ## Configuration
 
-Hyprnav automatically creates configuration files in `~/.config/hyprnav` when first run. These files include:
+**hyprnav** automatically creates configuration files in `~/.config/hyprnav` when first run. These files include:
 
 - `config.yaml`: Main configuration file
 - `style.css`: Customizable stylesheet for the application appearance
