@@ -1,6 +1,6 @@
-# Hyprnav
+# hyprnav
 
-![hyprnav show](gif/hyprnav-show.gif)
+![hyprnav](gif/hyprnav-show.gif)
 
 <div align="center">
   <span>
@@ -21,7 +21,7 @@ hyprnav provides smooth visual transitions when navigating between workspaces in
 ## Features
 
 - Beautiful and smooth visual transition effect between Hyprland workspaces
-- Optional sound effects for workspace transitions
+- Enable or disable optional sound for workspace transitions
 - Easy configuration through YAML files
 
 ## Installation
@@ -35,22 +35,17 @@ uv pip install hyprnav # or with uv
 
 ### Arch Linux (AUR)
 
-Using yay:
-
 ```bash
-yay -S hyprnav
-```
-
-Using paru:
-
-```bash
-paru -S hyprnav
+yay -S hyprnav # with yay
+paru -S hyprnav # with paru
 ```
 
 ## Usage
 
+Start with default settings.
+
 ```bash
-hyprnav         # Start with default settings
+hyprnav
 ```
 
 ## Configuration
@@ -87,18 +82,6 @@ sound:
 
 - `enabled`: Toggle sound effects on/off (default: false)
 - `file`: Absolute path to the sound file that will play during transitions (WAV format recommended)
-
-### Enabling Sound Effects
-
-To enable sound effects for workspace transitions, edit your `~/.config/hyprnav/config.yaml` file:
-
-```yaml
-sound:
-  enabled: true # Change from false to true
-  file: "/path/to/your/sound/file.wav" # Specify the path to your sound file
-```
-
-The default configuration has sounds disabled. You'll need to provide a valid audio file path (WAV format recommended) for the transition sound to work.
 
 ### Customizing Appearance
 
@@ -141,15 +124,3 @@ After making changes to the stylesheet, restart Hyprnav for the changes to take 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests on the [GitHub repository](https://github.com/antrax2024/hyprnav).
-
-To contribute:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
