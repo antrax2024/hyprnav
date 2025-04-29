@@ -2,10 +2,11 @@ import os
 import sys
 from hyprpy import Hyprland
 from .window import showWorkspaceWindow
-from playsound3 import playsound
 from rich.console import Console
 from .config import AppConfig
 from typing import Any
+from nava import play, stop
+
 
 # initialize console with custom log‐time format
 cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
@@ -18,25 +19,20 @@ except Exception as e:
 appConfig = AppConfig()
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
-currentSound = None  # current sound to be played
 
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
     if not os.path.exists(appConfig.sound.file):
         cl.print(f"[red]Audio file not found: {appConfig.sound.file}[/red]")
         sys.exit(1)
-
-    # now the audio is ok
-    audioFileOK = True
+    else:
+        # now the audio is ok
+        audioFileOK = True
 
 
 def playSound() -> None:
-    global currentSound
     if audioFileOK:
-        if currentSound and currentSound.is_alive():
-            currentSound.stop()
-
-        currentSound = playsound(sound=f"{appConfig.sound.file}", block=False)
+        play(appConfig.sound.file, async_mode=True, loop=False)
 
 
 def onWorkspaceChanged(sender: Any, **kwargs) -> None:

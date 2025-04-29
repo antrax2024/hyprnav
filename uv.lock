@@ -12,6 +12,15 @@ wheels = [
 ]
 
 [[package]]
+name = "art"
+version = "6.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d4/7d/7d80509bbd19fb747edef94ba487dbadd2747944774ccc0528ad0d005a36/art-6.5.tar.gz", hash = "sha256:a98d77b42c278697ec6cf4b5bdcdfd997f6b2425332da078d4e31e31377d1844", size = 672902, upload_time = "2025-04-12T17:02:20.279Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/67/29/57b06fdb3abdf52c621d3ca3caea735e2db4c8d48288ebd26af448e8e247/art-6.5-py3-none-any.whl", hash = "sha256:70706408144c45c666caab690627d5c74aea7b6c7ce8cc968408ddeef8d84afd", size = 610382, upload_time = "2025-04-12T17:02:21.97Z" },
+]
+
+[[package]]
 name = "confz"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -33,6 +42,7 @@ source = { editable = "." }
 dependencies = [
     { name = "confz" },
     { name = "hyprpy" },
+    { name = "nava" },
     { name = "pyqt6" },
     { name = "rich" },
 ]
@@ -41,6 +51,7 @@ dependencies = [
 requires-dist = [
     { name = "confz", specifier = ">=2.1.0" },
     { name = "hyprpy", specifier = ">=0.2.0" },
+    { name = "nava", specifier = ">=0.7" },
     { name = "pyqt6", specifier = ">=6.9.0" },
     { name = "rich", specifier = ">=14.0.0" },
 ]
@@ -76,6 +87,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec958cb99bd3efefba235e65cdeb9c84d24a8293ba1d90/mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba", size = 8729, upload_time = "2022-08-14T12:40:10.846Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8", size = 9979, upload_time = "2022-08-14T12:40:09.779Z" },
+]
+
+[[package]]
+name = "nava"
+version = "0.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "art" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/99/ac/43e77dedad00a84a33bb6ae1f88eb73a56723a66204d49389ff722bb3426/nava-0.7.tar.gz", hash = "sha256:45266e70646c68d80f14a636d93ea81038b67513a858d2d7875c821cfb74c2d6", size = 11724, upload_time = "2024-10-23T00:41:32.078Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5b/57/f9c64bcfe13b32ee326a58ea31911e6db453bb1e279d212e528279d0270e/nava-0.7-py3-none-any.whl", hash = "sha256:7f4f1520949becbbbd81dad072da88db57b474cb92a1985a71222d35bedd93ee", size = 10083, upload_time = "2024-10-23T00:41:33.766Z" },
 ]
 
 [[package]]
