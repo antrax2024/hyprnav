@@ -9,7 +9,6 @@ requires-python = ">=3.13"
 dependencies = [
     "confz>=2.1.0",
     "hyprpy>=0.2.0",
-    "playsound3>=3.2.3",
     "pyqt6>=6.9.0",
     "rich>=14.0.0",
 ]
