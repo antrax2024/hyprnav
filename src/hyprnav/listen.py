@@ -5,7 +5,7 @@ from .window import showWorkspaceWindow
 from rich.console import Console
 from .config import AppConfig
 from typing import Any
-from nava import play, stop
+from nava import play
 
 
 # initialize console with custom log‐time format
