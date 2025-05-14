@@ -1,6 +1,6 @@
 import os
 from rich.console import Console
-from .config import ensureConfigFiles, AppConfig
+from .config import ensureConfigFiles
 
 # Initialize console
 cl = Console()
