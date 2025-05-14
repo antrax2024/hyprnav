@@ -1,3 +1,5 @@
+<!-- markdownlint-disable -->
+
 # hyprnav
 
 ![hyprnav](gif/hyprnav-show.gif)
@@ -14,17 +16,17 @@
 
 A modern and customizable workspace navigation effect for [Hyprland](https://hyprland.org/).
 
-## Description
+## Description 📝
 
 **hyprnav** provides smooth visual transitions when navigating between workspaces in [Hyprland](https://hyprland.org/). It enhances the user experience by adding polished animations and optional sound effects.
 
-## Features
+## Features ✨
 
 - Beautiful and smooth visual transition effect between Hyprland workspaces
 - Enable or disable optional sound for workspace transitions
 - Easy configuration through YAML files
 
-## Installation
+## Installation 📦
 
 ### 1. Hyprland Configuration (Important)
 
@@ -51,7 +53,7 @@ yay -S hyprnav # with yay
 paru -S hyprnav # with paru
 ```
 
-## Usage
+## Usage ▶️
 
 Start with default settings.
 
@@ -59,7 +61,7 @@ Start with default settings.
 hyprnav
 ```
 
-## Configuration
+## Configuration ⚙️
 
 **hyprnav** automatically creates configuration files in `~/.config/hyprnav` when first run. These files include:
 
@@ -94,7 +96,7 @@ sound:
 - `enabled`: Toggle sound effects on/off (default: false)
 - `file`: Absolute path to the sound file that will play during transitions (WAV format recommended)
 
-### Customizing Appearance
+### Customizing Appearance 🎨
 
 You can customize the appearance of Hyprnav by editing the `~/.config/hyprnav/style.css` file. This file allows you to change colors, fonts, sizes, and other visual aspects of the application.
 
@@ -132,6 +134,6 @@ You can customize these elements to match your desktop theme:
 
 After making changes to the stylesheet, restart Hyprnav for the changes to take effect.
 
-## License
+## License 📄
 
 This project is licensed under the MIT License - see the LICENSE file for details.

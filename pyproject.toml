@@ -1,26 +1,26 @@
 [project]
 name = "hyprnav"
-version = "0.1.2"
+version = "0.1.4"
 description = "A modern and customizable workspace navigation effect for Hyprland."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Antrax", email = "fredcox@gmail.com" }]
 requires-python = ">=3.13"
 dependencies = [
-    "confz>=2.1.0",
-    "hyprpy>=0.2.0",
-    "nava>=0.7",
-    "pyqt6>=6.9.0",
-    "rich>=14.0.0",
+  "confz>=2.1.0",
+  "hyprpy>=0.2.0",
+  "nava>=0.7",
+  "pyqt6>=6.9.0",
+  "rich>=14.0.0",
 ]
 
 [project.urls]
-homepage   = "https://github.com/antrax2024/hyprnav"
+homepage = "https://github.com/antrax2024/hyprnav"
 Repository = "https://github.com/antrax2024/hyprnav"
 
 [project.scripts]
 hyprnav = "hyprnav:main"
 
 [build-system]
-requires      = ["hatchling"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
