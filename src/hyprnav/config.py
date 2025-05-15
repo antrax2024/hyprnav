@@ -54,8 +54,6 @@ def checkFile(file: str) -> None:
 
 
 def copyFile(destination) -> None:
-    destinationDir = os.path.dirname(destination)
-
     # Extract only the filename from destination variable
     filename = os.path.basename(destination)
 
