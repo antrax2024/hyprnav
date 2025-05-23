@@ -30,26 +30,30 @@ class WorkspaceWindow(Gtk.Window):
             self.config.main_window.width, self.config.main_window.height
         )
 
-        # self.set_decorated(False)
-        #
         printLog(f"set css id to{APP_NAME.lower()}...")
         self.set_name(f"{APP_NAME.lower()}")
 
+        printLog("set resizable to False...")
         LayerShell.init_for_window(self)
         LayerShell.set_layer(self, LayerShell.Layer.OVERLAY)
 
         # Centraliza a janela na tela
+        printLog("set window position to center...")
         LayerShell.set_anchor(self, LayerShell.Edge.LEFT, False)
         LayerShell.set_anchor(self, LayerShell.Edge.RIGHT, False)
         LayerShell.set_anchor(self, LayerShell.Edge.TOP, False)
         LayerShell.set_anchor(self, LayerShell.Edge.BOTTOM, False)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        label = Gtk.Label(label="Workspace")
-        label.set_margin_top(10)
-        label.set_margin_bottom(5)
+        box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=self.config.main_window.spacing,
+        )
+        # set box to vertical alignment to center
+        box.set_valign(Gtk.Align.CENTER)
+        label = Gtk.Label(label=self.config.main_window.label)
         box.append(label)
         self.workspace_label = Gtk.Label()
+
         box.append(self.workspace_label)
 
         self.set_child(box)
@@ -58,9 +62,12 @@ class WorkspaceWindow(Gtk.Window):
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
         loop = GLib.MainLoop()
-        GLib.timeout_add(
-            self.config.main_window.duration, lambda: (loop.quit(), False)[1]
-        )
+        # GLib.timeout_add(
+        #     self.config.main_window.duration, lambda: (loop.quit(), False)[1]
+        # )
+
+        GLib.timeout_add(5000, lambda: (loop.quit(), False)[1])
+
         loop.run()
 
 

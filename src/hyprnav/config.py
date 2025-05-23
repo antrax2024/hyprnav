@@ -79,6 +79,8 @@ class MainWindow(BaseConfig):
     width: int  # Width of the window
     height: int  # Height of the window
     duration: int  # Duration of the transition in milliseconds
+    spacing: int = 10  # vertical spacing between widgets
+    label: str = "Workspace"  # Label for the window
 
 
 # Main configuration class

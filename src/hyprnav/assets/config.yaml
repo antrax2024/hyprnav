@@ -10,7 +10,8 @@ main_window:
   width: 450 # the width of the main window
   height: 70 # the height of the main window
   duration: 400 # the transition timeout in milliseconds
-
+  spacing: 20 # vertical spacing
+  label: "Workspace" # label to show workspace
 
 sound:
   enabled: false # whether to play sound on transition?
