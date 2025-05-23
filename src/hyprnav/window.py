@@ -11,7 +11,7 @@ gi.require_version("Gtk4LayerShell", "1.0")
 from gi.repository import Gtk  # pyright: ignore #noqa
 from gi.repository import Gtk4LayerShell as LayerShell  # pyright: ignore #noqa
 from gi.repository import GLib  # pyright: ignore # noqa
-from hyprnav.constants import APP_NAME, APP_VERSION  # pyright: ignore # noqa
+from hyprnav.constants import APP_NAME, APP_VERSION, STYLE_FILE  # pyright: ignore # noqa
 from hyprnav.util import printLog  # pyright: ignore # noqa
 
 
@@ -31,7 +31,17 @@ class WorkspaceWindow(Gtk.Window):
         )
 
         printLog(f"set css id to{APP_NAME.lower()}...")
-        self.set_name(f"{APP_NAME.lower()}")
+        self.set_name("main-window")
+
+        # Carregar CSS
+        printLog("Setting up style with CSS path: " + STYLE_FILE)
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_path(f"{STYLE_FILE}")
+        display = self.get_display()
+        Gtk.StyleContext.add_provider_for_display(
+            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+        printLog("CSS provider loaded")
 
         printLog("set resizable to False...")
         LayerShell.init_for_window(self)
@@ -44,21 +54,30 @@ class WorkspaceWindow(Gtk.Window):
         LayerShell.set_anchor(self, LayerShell.Edge.TOP, False)
         LayerShell.set_anchor(self, LayerShell.Edge.BOTTOM, False)
 
+        printLog("orientation to vertical...")
         box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL,
             spacing=self.config.main_window.spacing,
         )
         # set box to vertical alignment to center
+        printLog("Set box to vertical alignment to center")
         box.set_valign(Gtk.Align.CENTER)
         label = Gtk.Label(label=self.config.main_window.label)
+
+        printLog("Append label to box...")
         box.append(label)
         self.workspace_label = Gtk.Label()
 
+        printLog("Append workspace label to box...")
         box.append(self.workspace_label)
 
+        printLog("Append box to window...")
         self.set_child(box)
 
     def showWorkspace(self, workspaceID: str):
+        printLog(
+            f"showWorkspace atribute called to display workspaceID ==> {workspaceID}"
+        )
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
         loop = GLib.MainLoop()

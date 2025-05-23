@@ -4,22 +4,21 @@
  */
 
 /* Main window and central widget styling - dark transparent background */
-#MainWindow,#centralWidget {
-    background-color: rgba(0, 0, 0, 0.849);
-    
+#main-window {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Main fixed label styling - used for application title or primary information */
 #fixedLabel {
-    color: #00ffd0;
-    font-size: 36px;
-    font-weight: bold;
-    font-family: "Hack Nerd Font Propo", monospace;
+  color: #00ffd0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Hack Nerd Font Propo", monospace;
 }
 
 /* Workspace label styling - used for displaying current workspace information */
 #workspaceLabel {
-    color: #00ffd0;
-    font-size: 26px;
-    font-family: "Hack Nerd Font Propo", monospace;
+  color: #00ffd0;
+  font-size: 26px;
+  font-family: "Hack Nerd Font Propo", monospace;
 }
