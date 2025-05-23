@@ -1,103 +1,82 @@
-import sys
-from PyQt6 import QtWidgets, QtCore
-from PyQt6.QtGui import QGuiApplication
-from .config import AppConfig
-import os
+from ctypes import CDLL
+
+from hyprnav.config import AppConfig
+
+CDLL("libgtk4-layer-shell.so")
+import gi  # noqa
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Gtk4LayerShell", "1.0")
+
+from gi.repository import Gtk  # pyright: ignore #noqa
+from gi.repository import Gtk4LayerShell as LayerShell  # pyright: ignore #noqa
+from gi.repository import GLib  # pyright: ignore # noqa
+from hyprnav.constants import APP_NAME, APP_VERSION  # pyright: ignore # noqa
+from hyprnav.util import printLog  # pyright: ignore # noqa
 
 
-app = None  # Global QApplication instance
-
-
-class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, workspace: str) -> None:
+class WorkspaceWindow(Gtk.Window):
+    def __init__(self, config: AppConfig):
         super().__init__()
-        # Set application name and class before creating QWidget
-        QGuiApplication.setApplicationName("hyprnav")
-        QGuiApplication.setDesktopFileName("hyprnav")
-        QGuiApplication.setApplicationDisplayName("hyprnav")
+        printLog("Creating workspace window instance...")
+        printLog("Atribute appConfig to self.config...")
+        self.config = config
+        printLog(f"set title to {APP_NAME} - v{APP_VERSION}")
+        self.set_title(f"{APP_NAME} - v{APP_VERSION}")
+        printLog(
+            f"set default size to {self.config.main_window.width}x{self.config.main_window.height} as config.yaml file"
+        )
+        self.set_default_size(
+            self.config.main_window.width, self.config.main_window.height
+        )
 
-        # setup main window
-        # appConfig
-        self.appConfig = AppConfig()
-        self.setObjectName("MainWindow")
-        self.setMinimumWidth(self.appConfig.main_window.width)
-        self.setMinimumHeight(self.appConfig.main_window.height)
+        # self.set_decorated(False)
+        #
+        printLog(f"set css id to{APP_NAME.lower()}...")
+        self.set_name(f"{APP_NAME.lower()}")
 
-        # Create a central widget and set layout
-        centralWidget = QtWidgets.QWidget(self)
-        centralWidget.setObjectName("centralWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(centralWidget)
+        LayerShell.init_for_window(self)
+        LayerShell.set_layer(self, LayerShell.Layer.OVERLAY)
 
-        # set up fixedLabel
-        self.fixedLabel = QtWidgets.QLabel("Workspace")
-        self.fixedLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.fixedLabel.setObjectName("fixedLabel")
-        self.verticalLayout.addWidget(self.fixedLabel)
+        # Centraliza a janela na tela
+        LayerShell.set_anchor(self, LayerShell.Edge.LEFT, False)
+        LayerShell.set_anchor(self, LayerShell.Edge.RIGHT, False)
+        LayerShell.set_anchor(self, LayerShell.Edge.TOP, False)
+        LayerShell.set_anchor(self, LayerShell.Edge.BOTTOM, False)
 
-        # set up workspaceLabel
-        self.workspaceLabel = QtWidgets.QLabel(f"{workspace}")
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        label = Gtk.Label(label="Workspace")
+        label.set_margin_top(10)
+        label.set_margin_bottom(5)
+        box.append(label)
+        self.workspace_label = Gtk.Label()
+        box.append(self.workspace_label)
 
-        self.workspaceLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.workspaceLabel.setObjectName("workspaceLabel")
-        self.verticalLayout.addWidget(self.workspaceLabel)
+        self.set_child(box)
 
-        # set window object name for css styling
-        self.setObjectName("MainWindow")
-
-        # Set the central widget before applying styles
-        self.setCentralWidget(centralWidget)
-
-        # apply styles
-        self.applyStyles()
-
-        self.show()
-
-    def applyStyles(self) -> None:
-        """
-        Applies CSS-like stylesheets from external CSS file.
-        Dynamically replaces variables with configuration values.
-        """
-        # Get the directory of the current module
-        currentDir = os.path.dirname(os.path.abspath(__file__))
-        cssPath = os.path.join(currentDir, "assets", "style.css")
-
-        try:
-            # Read CSS file content
-            with open(cssPath, "r") as cssFile:
-                cssContent = cssFile.read()
-
-            # Apply the stylesheet
-            self.setStyleSheet(cssContent)
-        except Exception as e:
-            print(f"Error loading CSS file: {e}")
-            # Fallback to inline styles
-            self.setStyleSheet(
-                """
-            #centralWidget {
-                background-color: #23272e;
-            }
-            
-            #fixedLabel {
-                color: #13d81d;
-                font-size: 36px;
-                font-weight: bold;
-            }
-            
-            #workspaceLabel {
-                color: #8be9fd;
-                font-size: 26px;
-            }
-            """
-            )
+    def showWorkspace(self, workspaceID: str):
+        self.workspace_label.set_label(f"{workspaceID}")
+        self.present()
+        loop = GLib.MainLoop()
+        GLib.timeout_add(
+            self.config.main_window.duration, lambda: (loop.quit(), False)[1]
+        )
+        loop.run()
 
 
-def showWorkspaceWindow(workspace: str, delay: int) -> None:
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow(workspace)
-    window.show()
-    QtCore.QTimer.singleShot(delay, window.close)
-    app.exec()
+def show_workspace_window(workspace, delay_ms):
+    win = WorkspaceWindow(workspace)
+    win.present()
+
+    GLib.timeout_add(delay_ms, win.close)
 
 
 if __name__ == "__main__":
-    pass
+    appConfig = AppConfig()
+    WorkspaceWindow(appConfig).showWorkspace("8")
+    # delay = 15000  # ms
+    # win = WorkspaceWindow(workspace)
+    # win.present()
+    # loop = GLib.MainLoop()
+    # GLib.timeout_add(delay, lambda: (loop.quit(), False)[1])
+    # loop.run()
