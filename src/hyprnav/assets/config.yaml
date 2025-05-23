@@ -10,7 +10,7 @@ main_window:
   width: 450 # the width of the main window
   height: 70 # the height of the main window
   duration: 400 # the transition timeout in milliseconds
-  spacing: 20 # vertical spacing
+  spacing: 10 # vertical spacing between labels
   label: "Workspace" # label to show workspace
 
 sound:

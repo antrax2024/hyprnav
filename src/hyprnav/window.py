@@ -62,13 +62,15 @@ class WorkspaceWindow(Gtk.Window):
         # set box to vertical alignment to center
         printLog("Set box to vertical alignment to center")
         box.set_valign(Gtk.Align.CENTER)
-        label = Gtk.Label(label=self.config.main_window.label)
+        fixed_label = Gtk.Label(label=self.config.main_window.label)
+        fixed_label.set_name("fixed-label")
 
-        printLog("Append label to box...")
-        box.append(label)
+        printLog("Append fixed-label to box...")
+        box.append(fixed_label)
         self.workspace_label = Gtk.Label()
+        self.workspace_label.set_name("workspace-label")
 
-        printLog("Append workspace label to box...")
+        printLog("Append workspace_label to box...")
         box.append(self.workspace_label)
 
         printLog("Append box to window...")
