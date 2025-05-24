@@ -85,7 +85,11 @@ class WorkspaceWindow(Gtk.Window):
         GLib.timeout_add(300, lambda: self.set_visible(False) or False)
 
 
-if __name__ == "__main__":
+win: WorkspaceWindow
+
+
+def StartWindow():
+    global win
     config = AppConfig()
     win = WorkspaceWindow(config)
     win.present()
