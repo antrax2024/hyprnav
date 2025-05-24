@@ -25,8 +25,8 @@ def main() -> None:
     ensureConfigFiles()
 
     # Import modules that require configuration only after configs are initialized
-    from .config import cli
-    from .listen import listen
+    from hyprnav.config import cli
+    from hyprnav.listen import listen
 
     # Run the application
     cli()
