@@ -7,17 +7,20 @@
 # - Apply camelCase convention for variables, methods and functions
 # **Note**: While camelCase conflicts with PEP8's snake_case recommendation
 # for Python, this requirement takes precedence per project specifications
-from hyprnav.config import ensureConfigFiles
+import threading
 
 
 def main() -> None:
+    # Import modules that require configuration only after configs are initialized
+    from hyprnav.config import ensureConfigFiles
+    from hyprnav.config import cli
+    from hyprnav.listen import listen
+    from hyprnav.window import startGtkLoop
+
     # Ensure config files exist before importing modules that use them
     ensureConfigFiles()
 
-    # Import modules that require configuration only after configs are initialized
-    from hyprnav.config import cli
-    from hyprnav.listen import listen
-
     # Run the application
     cli()
-    listen()
+    threading.Thread(target=listen, daemon=True).start()
+    startGtkLoop()
