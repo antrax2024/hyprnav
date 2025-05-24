@@ -39,7 +39,7 @@ def playSound() -> None:
 def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     """Handle workspace change events"""
     workspaceId = kwargs.get("workspace_id")
-    workspaceName = kwargs.get("workspace_name")
+    workspaceName: str = str(kwargs.get("workspace_name"))
 
     # Increment iterations counter before printing
     global iterations
@@ -52,7 +52,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     if audioFileOK:
         playSound()
 
-    workspaceWindow.showWorkspace(workspaceID=str(workspaceName))
+    workspaceWindow.showWorkspace(workspaceID=workspaceName)
 
 
 def listen() -> None:

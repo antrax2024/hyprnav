@@ -77,26 +77,11 @@ class WorkspaceWindow(Gtk.Window):
         self.set_child(box)
 
     def showWorkspace(self, workspaceID: str):
-        printLog(
-            f"showWorkspace atribute called to display workspaceID ==> {workspaceID}"
-        )
+        """Exibe a janela com o ID do workspace por um curto período de tempo."""
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
-        loop = GLib.MainLoop()
-        GLib.timeout_add(
-            self.config.main_window.duration, lambda: (loop.quit(), False)[1]
-        )
-
-        # GLib.timeout_add(5000, lambda: (loop.quit(), False)[1])
-
-        loop.run()
-
-
-def show_workspace_window(workspace, delay_ms):
-    win = WorkspaceWindow(workspace)
-    win.present()
-
-    GLib.timeout_add(delay_ms, win.close)
+        # Agenda o fechamento automático da janela
+        GLib.timeout_add(self.config.main_window.duration, lambda: self.hide() or False)
 
 
 if __name__ == "__main__":
