@@ -19,15 +19,9 @@ def main() -> None:
     ensureConfigFiles()
 
     # Import modules that require configuration only after configs are initialized
-    import sys
     from hyprnav.config import cli
     from hyprnav.listen import listen
-    from hyprnav.window import onActivate
 
     # Run the application
     cli()
     listen()
-
-    app = Gtk.Application()
-    app.connect("activate", onActivate)
-    app.run(sys.argv)
