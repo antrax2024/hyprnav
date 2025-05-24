@@ -7,27 +7,27 @@
 # - Apply camelCase convention for variables, methods and functions
 # **Note**: While camelCase conflicts with PEP8's snake_case recommendation
 # for Python, this requirement takes precedence per project specifications
-import os
-from rich.console import Console
-from .config import ensureConfigFiles
+from hyprnav.config import ensureConfigFiles
+import gi
 
-# Initialize console
-cl = Console()
+gi.require_version("Gtk", "4.0")
+from gi.repository import Gtk  # pyright: ignore # noqa
 
 
 def main() -> None:
-    try:
-        del os.environ["QT_STYLE_OVERRIDE"]
-    except KeyError:
-        pass
-
     # Ensure config files exist before importing modules that use them
     ensureConfigFiles()
 
     # Import modules that require configuration only after configs are initialized
+    import sys
     from hyprnav.config import cli
     from hyprnav.listen import listen
+    from hyprnav.window import onActivate
 
     # Run the application
     cli()
     listen()
+
+    app = Gtk.Application()
+    app.connect("activate", onActivate)
+    app.run(sys.argv)
