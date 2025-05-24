@@ -20,8 +20,6 @@ def copyFile(destination) -> None:
 
 
 def main() -> None:
-    # Import modules that require configuration only after configs are initialized
-
     # certify if hyprland is running
     try:
         Hyprland()
