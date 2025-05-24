@@ -5,6 +5,7 @@ from rich.console import Console
 from typing import Any
 from nava import play
 from hyprnav.config import AppConfig
+from hyprnav.window import showWorkspace
 
 # initialize console with custom log‐time format
 cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
@@ -52,7 +53,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     if audioFileOK:
         playSound()
 
-    # workspaceWindow.showWorkspace(workspaceID=workspaceName)
+    showWorkspace(workspaceID=workspaceName)
 
 
 def listen() -> None:
