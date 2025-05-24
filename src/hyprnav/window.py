@@ -150,7 +150,7 @@ def startGtkLoop() -> None:
     printLog("Instantiate the config Class ")
 
     # Create the GTK application with unique application ID
-    printLog("Create a new Application instance with 'com.antrax.HyprBar' as an id")
+    printLog("Create a new Application instance with 'com.antrax.hyprnav' as an id")
     app = Gtk.Application(application_id="com.antrax.hyprnav")
 
     # Connect the activate signal to our window creation function
