@@ -1,9 +1,19 @@
 /**
  * Main stylesheet for HyprNav application
  * Contains styling for the main window and labels
- *  Please use Gtk4 CSS syntax
+ * Please use Gtk4 CSS syntax
  */
 
+/**
+ * Main application window styling
+ * Creates a semi-transparent dark overlay with cyan border and rounded corners
+ * 
+ * Properties:
+ * - Semi-transparent black background (70% opacity)
+ * - Cyan border with 2px width (#00ffd0)
+ * - Rounded corners with 12px radius
+ * - Vertical padding for content spacing
+ */
 #main-window {
   background-color: rgba(0, 0, 0, 0.7);
   border: 2px solid #00ffd0;
@@ -12,6 +22,16 @@
   padding-bottom: 10px;
 }
 
+/**
+ * Fixed label styling for static text elements
+ * Large, bold cyan text using monospace font
+ * 
+ * Typography:
+ * - Color: Cyan (#00ffd0) matching the window border
+ * - Size: 36px for high visibility
+ * - Weight: Bold for emphasis
+ * - Font: Hack Nerd Font Propo with monospace fallback
+ */
 #fixed-label {
   color: #00ffd0;
   font-size: 36px;
@@ -19,6 +39,16 @@
   font-family: "Hack Nerd Font Propo", monospace;
 }
 
+/**
+ * Workspace label styling for dynamic workspace information
+ * Medium-sized cyan text using monospace font
+ * 
+ * Typography:
+ * - Color: Cyan (#00ffd0) for consistency with theme
+ * - Size: 26px, smaller than fixed-label for hierarchy
+ * - Font: Hack Nerd Font Propo with monospace fallback
+ * - Normal weight for readable secondary information
+ */
 #workspace-label {
   color: #00ffd0;
   font-size: 26px;
