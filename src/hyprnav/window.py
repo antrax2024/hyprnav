@@ -83,11 +83,11 @@ class WorkspaceWindow(Gtk.Window):
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
         loop = GLib.MainLoop()
-        # GLib.timeout_add(
-        #     self.config.main_window.duration, lambda: (loop.quit(), False)[1]
-        # )
+        GLib.timeout_add(
+            self.config.main_window.duration, lambda: (loop.quit(), False)[1]
+        )
 
-        GLib.timeout_add(5000, lambda: (loop.quit(), False)[1])
+        # GLib.timeout_add(5000, lambda: (loop.quit(), False)[1])
 
         loop.run()
 

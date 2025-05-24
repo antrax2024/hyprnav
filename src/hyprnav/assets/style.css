@@ -1,10 +1,15 @@
 /**
  * Main stylesheet for HyprNav application
  * Contains styling for the main window and labels
+ *  Please use Gtk4 CSS syntax
  */
 
 #main-window {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid #00ffd0;
+  border-radius: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #fixed-label {

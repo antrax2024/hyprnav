@@ -1,11 +1,11 @@
 import os
 import sys
 from hyprpy import Hyprland
-from .window import showWorkspaceWindow
 from rich.console import Console
-from .config import AppConfig
 from typing import Any
 from nava import play
+from hyprnav.config import AppConfig
+from hyprnav.window import WorkspaceWindow
 
 
 # initialize console with custom log‐time format
@@ -17,6 +17,7 @@ except Exception as e:
     sys.exit(1)
 
 appConfig = AppConfig()
+workspaceWindow = WorkspaceWindow(config=appConfig)
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
 
@@ -51,7 +52,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     if audioFileOK:
         playSound()
 
-    showWorkspaceWindow(workspace=workspaceName, delay=appConfig.main_window.duration)  # type: ignore
+    workspaceWindow.showWorkspace(workspaceID=str(workspaceName))
 
 
 def listen() -> None:
