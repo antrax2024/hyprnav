@@ -11,6 +11,7 @@ gi.require_version("Gtk4LayerShell", "1.0")
 from gi.repository import Gtk  # pyright: ignore #noqa
 from gi.repository import Gtk4LayerShell as LayerShell  # pyright: ignore #noqa
 from gi.repository import GLib  # pyright: ignore # noqa
+import sys  # pyright: ignore # noqa
 from hyprnav.constants import APP_NAME, APP_VERSION, STYLE_FILE  # pyright: ignore # noqa
 from hyprnav.util import printLog  # pyright: ignore # noqa
 
@@ -80,7 +81,19 @@ class WorkspaceWindow(Gtk.Window):
     def showWorkspace(self, workspaceID: str):
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
-        # Agenda o fechamento automático da janela
-        GLib.timeout_add(
-            self.config.main_window.duration, lambda: self.close() or False
-        )
+        # Schedule automatic window closing after 300ms
+        GLib.timeout_add(300, lambda: self.close() or False)
+
+
+def onActivate(app):
+    window = WorkspaceWindow(config)
+    app.add_window(window)
+
+    window.showWorkspace("Gonha")
+
+
+if __name__ == "__main__":
+    config = AppConfig()
+    app = Gtk.Application()
+    app.connect("activate", onActivate)
+    app.run(sys.argv)

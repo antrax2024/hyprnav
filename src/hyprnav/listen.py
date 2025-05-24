@@ -53,7 +53,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     if audioFileOK:
         playSound()
 
-    # window.showWorkspace(workspaceID=workspaceName)
+    workspaceWindow.showWorkspace(workspaceID=workspaceName)
 
 
 def listen() -> None:
