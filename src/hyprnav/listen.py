@@ -6,6 +6,7 @@ from typing import Any
 from nava import play
 from hyprnav.config import AppConfig
 from hyprnav.window import WorkspaceWindow
+from gi.repository import Gtk  # pyright: ignore #noqa
 
 
 # initialize console with custom log‐time format
@@ -20,6 +21,20 @@ appConfig = AppConfig()
 workspaceWindow = WorkspaceWindow(config=appConfig)
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
+app = Gtk.Application(application_id="com.antrax.hyprnav")
+window: WorkspaceWindow = None  # type: ignore
+
+
+def onActivate(app):
+    global window
+    appConfig = AppConfig()
+    window = WorkspaceWindow(appConfig)
+    app.add_window(window)
+
+
+app.connect("activate", onActivate)
+app.run()  # pyright: ignore # noqa
+
 
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
@@ -52,7 +67,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     if audioFileOK:
         playSound()
 
-    workspaceWindow.showWorkspace(workspaceID=workspaceName)
+    window.showWorkspace(workspaceID=workspaceName)
 
 
 def listen() -> None:

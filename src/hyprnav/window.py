@@ -18,6 +18,7 @@ from hyprnav.util import printLog  # pyright: ignore # noqa
 class WorkspaceWindow(Gtk.Window):
     def __init__(self, config: AppConfig):
         super().__init__()
+
         printLog("Creating workspace window instance...")
         printLog("Atribute appConfig to self.config...")
         self.config = config
@@ -77,19 +78,9 @@ class WorkspaceWindow(Gtk.Window):
         self.set_child(box)
 
     def showWorkspace(self, workspaceID: str):
-        """Exibe a janela com o ID do workspace por um curto período de tempo."""
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
         # Agenda o fechamento automático da janela
-        GLib.timeout_add(self.config.main_window.duration, lambda: self.hide() or False)
-
-
-if __name__ == "__main__":
-    appConfig = AppConfig()
-    WorkspaceWindow(appConfig).showWorkspace("8")
-    # delay = 15000  # ms
-    # win = WorkspaceWindow(workspace)
-    # win.present()
-    # loop = GLib.MainLoop()
-    # GLib.timeout_add(delay, lambda: (loop.quit(), False)[1])
-    # loop.run()
+        GLib.timeout_add(
+            self.config.main_window.duration, lambda: self.close() or False
+        )
