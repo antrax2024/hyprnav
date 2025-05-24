@@ -25,28 +25,19 @@ A modern and customizable workspace navigation effect for [Hyprland](https://hyp
 - Beautiful and smooth visual transition effect between Hyprland workspaces
 - Enable or disable optional sound for workspace transitions
 - Easy configuration through YAML files
+- Fully customizable with CSS
+- Wayland native GUI with [Gtk4-Layer-Shell](https://github.com/wmww/gtk4-layer-shell)
 
 ## Installation 📦
 
-### 1. Hyprland Configuration (Important)
-
-Edit your _hyprland.conf_ and add the following line:
-
-```ini
-# Rule for hyprnav
-windowrulev2 = float,class:hyprnav
-```
-
-### 2. Install
-
-#### From PyPI
+### From PyPI
 
 ```bash
 pip install hyprnav # if you use pip
 uv pip install hyprnav # or with uv
 ```
 
-#### Arch Linux (AUR)
+### Arch Linux (AUR)
 
 ```bash
 yay -S hyprnav # with yay
@@ -72,65 +63,51 @@ hyprnav
 
 The `config.yaml` file contains the following configurable parameters:
 
-#### Main Window
+### Configuration Parameters
 
-```yaml
-main_window:
-  width: 450 # Width of the transition window in pixels
-  height: 70 # Height of the transition window in pixels
-  duration: 400 # Duration of transition animation in milliseconds
-```
+The `config.yaml` file contains the following configurable parameters:
 
-- `width`: Controls the horizontal size of the animation window (default: 450px)
-- `height`: Controls the vertical size of the animation window (default: 70px)
-- `duration`: Sets how long the transition animation plays (default: 400ms)
+#### Main Window Settings
+
+- **`width`**: Controls the width of the navigation window in pixels (default: 450)
+- **`height`**: Controls the height of the navigation window in pixels (default: 70)
+- **`duration`**: Sets the transition timeout duration in milliseconds (default: 300)
+- **`spacing`**: Defines the vertical spacing between labels in pixels (default: 10)
+- **`label`**: Customizes the text label displayed for workspace identification (default: "Workspace")
 
 #### Sound Settings
 
+- **`enabled`**: Boolean flag to enable or disable sound effects during workspace transitions (default: false)
+- **`file`**: Absolute path to the audio file that will be played during transitions (default: "/home/user/Public/transition.wav")
+
+#### Example Configuration
+
 ```yaml
+main_window:
+  width: 450
+  height: 70
+  duration: 300
+  spacing: 10
+  label: "Workspace"
+
 sound:
-  enabled: false # Set to true to enable sound effects
-  file: "/path/to/your/sound/file.wav" # Path to the sound file
+  enabled: false
+  file: "/home/user/Public/transition.wav"
 ```
 
-- `enabled`: Toggle sound effects on/off (default: false)
-- `file`: Absolute path to the sound file that will play during transitions (WAV format recommended)
+**Note**: Make sure to update the sound file path to point to an existing audio file on your system if you want to enable sound effects.
 
 ### Customizing Appearance 🎨
 
 You can customize the appearance of Hyprnav by editing the `~/.config/hyprnav/style.css` file. This file allows you to change colors, fonts, sizes, and other visual aspects of the application.
 
-#### Default Stylesheet Elements
-
-```css
-/* Main window styling - controls the background */
-#MainWindow,
-#centralWidget {
-  background-color: rgba(0, 0, 0, 0.849); /* Dark transparent background */
-}
-
-/* Fixed label styling - used for application title */
-#fixedLabel {
-  color: #00ffd0; /* Teal/cyan color */
-  font-size: 36px;
-  font-weight: bold;
-  font-family: "Hack Nerd Font Propo", monospace;
-}
-
-/* Workspace label styling - displays workspace information */
-#workspaceLabel {
-  color: #00ffd0; /* Teal/cyan color */
-  font-size: 26px;
-  font-family: "Hack Nerd Font Propo", monospace;
-}
-```
+#### Stylesheet Elements
 
 You can customize these elements to match your desktop theme:
 
-- Change the background transparency by adjusting the alpha value in `rgba(0, 0, 0, 0.849)`
-- Modify text colors by changing the color values (e.g., `#00ffd0`)
-- Adjust font sizes and families to your preference
-- Add additional CSS rules to further customize the appearance
+- **`#main-window`**: The main container window with background color, border, border-radius, and padding properties
+- **`#fixed-label`**: The "Workspace" text label with color, font-size, font-weight, and font-family styling
+- **`#workspace-label`**: The workspace number/name label with color, font-size, and font-family properties
 
 After making changes to the stylesheet, restart Hyprnav for the changes to take effect.
 

@@ -16,7 +16,6 @@ from hyprnav.constants import SPACES_DEFAULT
 
 
 cl = Console(log_time_format="[%Y-%m-%d %H:%M:%S]")
-# Força o Rich a não omitir timestamps repetidos
 cl._log_render.omit_repeated_times = False
 
 

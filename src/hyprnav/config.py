@@ -1,22 +1,6 @@
-import sys
 import os
-import shutil
-from typing import Any
 from confz import BaseConfig, FileSource
-from .constants import APP_NAME, APP_VERSION, CONFIG_FILE, STYLE_FILE
-import importlib.resources
-from rich.console import Console
-from rich.table import Table
-from hyprnav.util import fileExists, showError
-
-cl = Console()
-
-
-def printMessage(preamble: str, variable: Any) -> None:
-    """
-    Print a message to the console with fixed width preamble.
-    """
-    cl.print(f"[bold yellow]{preamble:<15}[/bold yellow]: {variable}")
+from .constants import APP_NAME
 
 
 class Sound(BaseConfig):
