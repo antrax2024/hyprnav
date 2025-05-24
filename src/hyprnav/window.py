@@ -82,23 +82,13 @@ class WorkspaceWindow(Gtk.Window):
         self.workspace_label.set_label(f"{workspaceID}")
         self.present()
         # Schedule automatic window closing after 300ms
-        GLib.timeout_add(300, lambda: self.hide() or False)
+        GLib.timeout_add(300, lambda: self.set_visible(False) or False)
 
 
-# window: WorkspaceWindow
-#
-#
-# def onActivate(app):
-#     global window
-#     appConfig = AppConfig()
-#     window = WorkspaceWindow(appConfig)
-#     app.add_window(window)
-#
-#     window.showWorkspace("Gonha")
-#
-#
-# if __name__ == "__main__":
-#     config = AppConfig()
-#     app = Gtk.Application()
-#     app.connect("activate", onActivate)
-#     app.run(sys.argv)
+if __name__ == "__main__":
+    config = AppConfig()
+    win = WorkspaceWindow(config)
+    win.present()
+    GLib.timeout_add(300, lambda: win.set_visible(False) or False)
+
+    GLib.MainLoop().run()

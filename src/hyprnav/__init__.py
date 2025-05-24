@@ -8,10 +8,6 @@
 # **Note**: While camelCase conflicts with PEP8's snake_case recommendation
 # for Python, this requirement takes precedence per project specifications
 from hyprnav.config import ensureConfigFiles
-import gi
-
-gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk  # pyright: ignore # noqa
 
 
 def main() -> None:
