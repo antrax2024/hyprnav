@@ -1,18 +1,16 @@
 import os
 import sys
 from hyprpy import Hyprland
-from rich.console import Console
 from typing import Any
 from nava import play
 from hyprnav.config import AppConfig
 from hyprnav.window import showWorkspace
+from hyprnav.util import printLog
 
-# initialize console with custom log‐time format
-cl: Console = Console(log_time=True, log_time_format="%Y-%m-%d %H:%M:%S")
 try:
     instance = Hyprland()
 except Exception as e:
-    cl.print(f"[red]Error connecting to Hyprland: {e}[/red]")
+    printLog(f"[red]Error connecting to Hyprland: {e}[/red]")
     sys.exit(1)
 
 appConfig = AppConfig()
@@ -25,7 +23,7 @@ iterations: int = 0  # number of iterations to wait for the workspace to be read
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
     if not os.path.exists(appConfig.sound.file):
-        cl.print(f"[red]Audio file not found: {appConfig.sound.file}[/red]")
+        printLog(f"[red]Audio file not found: {appConfig.sound.file}[/red]")
         sys.exit(1)
     else:
         # now the audio is ok
@@ -46,7 +44,7 @@ def onWorkspaceChanged(sender: Any, **kwargs) -> None:
     global iterations
     iterations += 1
 
-    cl.print(
+    printLog(
         f"{iterations}\t: [bold yellow]Workspace[/bold yellow]: id: {workspaceId} name: {workspaceName}"
     )
 
@@ -63,5 +61,5 @@ def listen() -> None:
         instance.signals.workspacev2.connect(onWorkspaceChanged)
         instance.watch()
     except KeyboardInterrupt:
-        cl.print("[green]Interrupt by user. Exiting...[/green]")
+        printLog("[green]Interrupt by user. Exiting...[/green]")
         return
