@@ -2,7 +2,7 @@ import os
 import sys
 from hyprpy import Hyprland
 from typing import Any
-from nava import play
+from just_playback import Playback
 from hyprnav.config import AppConfig
 from hyprnav.window import showWorkspace
 from hyprnav.util import printLog
@@ -18,6 +18,7 @@ appConfig = AppConfig()
 
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
+playback = Playback()
 
 
 if appConfig.sound.enabled:
@@ -27,12 +28,13 @@ if appConfig.sound.enabled:
         sys.exit(1)
     else:
         # now the audio is ok
+        playback.load_file(appConfig.sound.file)
         audioFileOK = True
 
 
 def playSound() -> None:
     if audioFileOK:
-        play(appConfig.sound.file, async_mode=True, loop=False)
+        playback.play()
 
 
 def onWorkspaceChanged(sender: Any, **kwargs) -> None:
