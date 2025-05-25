@@ -9,7 +9,7 @@ requires-python = ">=3.13"
 dependencies = [
   "confz>=2.1.0",
   "hyprpy>=0.2.0",
-  "just-playback>=0.1.8",
+  "playsound3>=3.2.3",
   "pygobject>=3.52.3",
   "pygobject-stubs>=2.13.0",
   "rich>=14.0.0",

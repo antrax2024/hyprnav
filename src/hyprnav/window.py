@@ -44,6 +44,16 @@ def onActivate(app: Gtk.Application) -> None:
 
     printLog("Creating workspace window instance...")
     window = Gtk.Window(application=app)
+    # Initialize LayerShell for the window to create an overlay
+    printLog("Initialize LayerShell for the window...")
+    LayerShell.init_for_window(window)
+
+    # Center the window on screen by disabling all edge anchors
+    printLog("set window position to center...")
+    LayerShell.set_anchor(window, LayerShell.Edge.LEFT, False)
+    LayerShell.set_anchor(window, LayerShell.Edge.RIGHT, False)
+    LayerShell.set_anchor(window, LayerShell.Edge.TOP, False)
+    LayerShell.set_anchor(window, LayerShell.Edge.BOTTOM, False)
 
     # Load application configuration
     appConfig = AppConfig()
@@ -69,17 +79,7 @@ def onActivate(app: Gtk.Application) -> None:
     )
     printLog("CSS provider loaded")
 
-    # Initialize LayerShell for the window to create an overlay
-    printLog("set resizable to False...")
-    LayerShell.init_for_window(window)
     LayerShell.set_layer(window, LayerShell.Layer.OVERLAY)
-
-    # Center the window on screen by disabling all edge anchors
-    printLog("set window position to center...")
-    LayerShell.set_anchor(window, LayerShell.Edge.LEFT, False)
-    LayerShell.set_anchor(window, LayerShell.Edge.RIGHT, False)
-    LayerShell.set_anchor(window, LayerShell.Edge.TOP, False)
-    LayerShell.set_anchor(window, LayerShell.Edge.BOTTOM, False)
 
     # Create vertical layout container
     printLog("orientation to vertical...")
