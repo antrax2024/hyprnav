@@ -19,7 +19,6 @@ appConfig = AppConfig()
 audioFileOK = False  # by default we assume the audio file is not ok
 iterations: int = 0  # number of iterations to wait for the workspace to be ready
 
-
 if appConfig.sound.enabled:
     # check if appConfig.sound.file exists
     if not os.path.exists(appConfig.sound.file):

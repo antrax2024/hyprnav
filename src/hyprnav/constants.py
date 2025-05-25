@@ -1,7 +1,7 @@
 import os
 
 # This is the version of the application.
-APP_VERSION = "0.1.12"
+APP_VERSION = "0.1.14"
 # This is the name of the application.
 APP_NAME = "hyprnav"
 
